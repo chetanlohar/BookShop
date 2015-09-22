@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <mapping class="com.sharanamvaishali.model.Country" />
+        <mapping class="com.sharanamvaishali.model.Category" />
+        <mapping class="com.sharanamvaishali.model.State" />
+        <mapping class="com.sharanamvaishali.model.Publisher" />
+        <mapping class="com.sharanamvaishali.model.User" />
+        <mapping class="com.sharanamvaishali.model.Author" />
+        <mapping class="com.sharanamvaishali.model.Book" />
+        <mapping class="com.sharanamvaishali.model.Transaction" />
+        <mapping class="com.sharanamvaishali.model.PopularSearch" />
+    </session-factory>
+</hibernate-configuration>

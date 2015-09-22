@@ -1,0 +1,32 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <http pattern="/admin/**" auto-config="true" >
+        <intercept-url pattern="/admin/manageUsers" access="ROLE_ADMIN"  />
+        <intercept-url pattern="/admin//manageCountries" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/manageStates" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/manageCategories" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/managePublishers" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/manageAuthors" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/manageBooks" access="ROLE_ADMIN, ROLE_USER"  />
+        <intercept-url pattern="/admin/manageTransactions" access="ROLE_ADMIN, ROLE_USER"  />
+        <form-login login-page="/admin/adminLogin" login-processing-url="/admin/j_spring_security_check" default-target-url="/admin/manageTransactions" authentication-failure-url="/admin/adminLoginFailed" />
+        <access-denied-handler error-page="/adminAccessDenied"/>
+        <logout logout-url="/admin/j_spring_security_logout" logout-success-url="/admin/adminLogout" />
+    </http>
+    <http auto-config="true" use-expressions="true">
+        <form-login login-page="/login" login-processing-url="/j_spring_security_check" default-target-url="/home" authentication-failure-url="/loginFailed" />
+        <logout logout-url="/j_spring_security_logout" logout-success-url="/home" />
+    </http>
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource" 
+            users-by-username-query="select username, password, enabled from Users where username=?" 
+            authorities-by-username-query="select username, authority from Users where username=?" />
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>
